@@ -8,11 +8,12 @@ const io = require('socket.io')(http, {
   }
 });
 const cors = require('cors');
-const path = require('path'); // EKLE
-app.use(cors());
-app.use(express.static('public')); // BU SATIRI EKLE
+const path = require('path');
 
-// Ana sayfa route'u EKLE
+app.use(cors());
+app.use(express.static('public'));
+
+// Ana sayfa
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -44,7 +45,6 @@ io.on('connection', (socket) => {
       currentTurnIndex: 0,
       jokers: {},
       theme: settings?.theme || 'default',
-      colorBlindMode: settings?.colorBlindMode || false,
       timerEnabled: settings?.timerEnabled || false,
       timerDuration: 42,
       password: settings?.password || null,
